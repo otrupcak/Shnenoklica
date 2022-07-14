@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Naslov</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  </head>
+
+<body>
+
+  <h1>KONTROLNA TABLA</h1>
+  <h3>Devojcica sa sibicama</h3>
+  
+  <div class="slidecontainer">
+    <input type="range" min="0" max="255" value="0" class="slider red" id="_red">
+    <p id="vlRed" name="Value Red"></p><br>
+  </div><br>
+
+  <div class="slidecontainer">
+    <input type="range" min="0" max="255" value="0" class="slider green" id="_green">
+    <p id="vlGreen" name="Value Green"></p><br>
+  </div><br>
+
+  <div class="slidecontainer">
+    <input type="range" min="0" max="255" value="0" class="slider blue" id="_blue">
+    <p id="vlBlue" name="Value Blue"></p><br>
+  </div><br>
+
+  <div class="slidecontainer">
+    <input type="range" min="1" max="254" value="200" class="slider brightness" id="_brightness">
+    <p id="vlBrgh" name="Value Brightness"></p><br>
+  </div><br>
+
+  <div class="square" id="boja"></div>
+
+
+  <script>
+    var sliderBR = document.getElementById("_brightness");
+    var outputBR = document.getElementById("vlBrgh");
+
+    var sliderR = document.getElementById("_red");
+    var outputR = document.getElementById("vlRed");
+
+    var sliderG = document.getElementById("_green");
+    var outputG = document.getElementById("vlGreen");
+
+    var sliderB = document.getElementById("_blue");
+    var outputB = document.getElementById("vlBlue");
+
+    var colorCheck = "rgb(" + sliderR.value + "," + sliderG.value + "," + sliderB.value + ")";
+
+    outputBR.innerHTML = sliderBR.value;
+    outputR.innerHTML = sliderR.value;
+    outputG.innerHTML = sliderG.value;
+    outputB.innerHTML = sliderB.value;
+
+    // Update the current slider value (each time you drag the slider handle)
+    sliderBR.oninput = function() {
+      outputBR.innerHTML = this.value;
+    }
+
+    sliderBR.onchange = function() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/button?value=R"+sliderR.value+"G"+sliderG.value+"B"+sliderB.value+"S"+sliderBR.value, true);
+      xhr.send();
+    }
+
+    sliderR.oninput = function() {
+      outputR.innerHTML = this.value;
+      colorCheck = "rgb(" + sliderR.value + "," + sliderG.value + "," + sliderB.value + ")";
+      document.getElementById("boja").style.background = colorCheck;
+    }
+
+    sliderR.onchange = function(){
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/button?value=R"+sliderR.value+"G"+sliderG.value+"B"+sliderB.value+"S"+sliderBR.value, true);
+      xhr.send();
+    }
+
+    sliderG.oninput = function() {
+      outputG.innerHTML = this.value;
+      colorCheck = "rgb(" + sliderR.value + "," + sliderG.value + "," + sliderB.value + ")";
+      document.getElementById("boja").style.background = colorCheck;
+    }
+
+    sliderG.onchange = function(){
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/button?value=R"+sliderR.value+"G"+sliderG.value+"B"+sliderB.value+"S"+sliderBR.value, true);
+      xhr.send();
+      document.getElementById("boja").style.background = "rgb(" + sliderR.value + sliderG.value + sliderB.value + ")";
+    }
+
+    sliderB.oninput = function() {
+      outputB.innerHTML = this.value;
+      colorCheck = "rgb(" + sliderR.value + "," + sliderG.value + "," + sliderB.value + ")";
+      document.getElementById("boja").style.background = colorCheck;
+    }
+
+    sliderB.onchange = function(){
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/button?value=R"+sliderR.value+"G"+sliderG.value+"B"+sliderB.value+"S"+sliderBR.value, true);
+      xhr.send();
+      document.getElementById("boja").style.background = "rgb(" + sliderR.value + sliderG.value + sliderB.value + ")";
+    }
+
+  </script>
+
+</body>
